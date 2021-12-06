@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Menu | Libro de Recetas
+{% endblock titulo %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body %}
+{% load humanize %}
+<div class="card" xmlns="http://www.w3.org/1999/html">
+
+    <div class="card-header">
+        <div class="row" style="margin: 30px;">
+            <div class="col-md-8 text-center ">
+                <strong class="card-title">
+                    <h2>Libro de Recetas</h2>
+                </strong>
+            </div>
+        </div>
+       
+        <div class="container">
+            <div class="row" style="padding: 10px 0;">
+                {% for receta in object_list %}
+                <div class="col-md-3" >
+                    <a >
+                        <div class="card " style="height: 25rem; width: 12rem; margin: 8px 0px; border: 2px solid #FF9B00; border-radius: 5px;background-color:#FFBA4E; " >
+                            <img class="card-img-top" style="height: 7.5rem; width: 1.5rem border: 2px solid #FFC05D; border-radius: 5px;" src="{{ receta.imagen.url }}" alt="Card image cap">
+                            <div class="card-body" style="height: 15rem; width: 12rem; background-color: #FEDDAA; border: 2px solid #FF9B00; border-radius: 5px;">
+                                <h4 class="card-title mb-3">{{ receta.titulo }}</h4>
+                                <p class="card-text ">{{ receta.descripcion| truncatewords:10}}</p>
+                                <h5>${{ receta.precio|intcomma }}</h5>
+                            </div>
+                            <div class="btn-group mr-2" >
+                                <a href="{% url 'restaurant:detalle_receta' receta.id %}" class="btn btn-secondary  " role="button">Ver</a>
+                                <a class="btn btn-warning btn-block" href="{% url 'restaurant:Add' receta.id %}" onclick="add_to_cart({item_description:'{{receta.titulo}}',price:{{receta.precio}} })">$ {{receta.precio}}</a>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+                
+                <br><br><br><br>
+
+            </div>
+            
+       
+
+        </div>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-primary">&laquo; Primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">Anterior</a>
+                {% endif %}
+
+                <span class="current">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-primary">Última &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+    </div>
+</div>
+
+{% endblock body %}
+{% block extrajs %}
+<script src="{% static 'jquery/jquery.min.js'%}"></script>
+<script src="{% static 'js/order.js' %}"></script>
+{% endblock extrajs %}

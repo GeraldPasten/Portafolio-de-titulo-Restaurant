@@ -1,0 +1,38 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body %}
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <h2 id="cart_heading"></h2>
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Pedido</th>
+          <th scope="col">Precio</th>
+        </tr>
+        </thead>
+        <tbody id="cart_body">
+        </tbody>
+    </table>
+
+
+    <h2>Total: <span class="badge badge-primary" id="total"></span></h2>
+  </div>
+
+  <div>
+    <a id="checkout_button" href="{% url 'restaurant:CLS' %}" type="button" class="btn btn-success" onclick="checkout()">Hacer el pedido</a>
+    <a type="button" href="{% url 'restaurant:boleta' %}" class="btn btn-primary" >Pagar</a>
+  </div>
+</div>
+
+
+
+
+
+{% endblock body %}
+{% block extrajs %}
+<script src="{% static 'js/order.js' %}"></script>
+{% endblock extrajs %}

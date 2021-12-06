@@ -1,0 +1,72 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Biblioteca.dev | {{ object }}
+{% endblock titulo %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body %}
+<div class="card">
+    <div class="card-header">
+        <div class="row" style="margin: 30px;">
+            <div class="col-md-12 text-center ">
+                <strong class="card-title">
+                    <h2>{{ object }}</h2>
+                </strong>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="card">
+                    {% csrf_token %}
+                  
+                    <img class="card-img-top" src="{{ object.imagen.url }}" alt="Card image cap">
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="card-text"><strong>{{ object.titulo }}</strong></p>
+                            </div>
+
+                            <div class="col-md-12">
+                                <p class="card-text"><strong>Descripcion</strong></p>
+                            </div>
+
+                             <div class="col-md-12">
+                                <p class="card-text">{{ object.descripcion }}</p>
+                            </div>
+
+                            <div class = "col-md-12">
+                                <p class ="card-text"><strong>Ingredientes</strong></p>
+
+                            </div>    
+
+                            <div class="col-md-12">
+                                <p class="card-text">{{ object.ingredientes }}</p>
+                            </div>
+
+                            <div class="col-md-12">
+                                <p class="card-text"><strong>Instrucciones</strong></p>
+                            </div>
+                            <div class="col-md-12">
+                                <p class="card-text">{{ object.instrucciones }}</p>
+                            </div>
+                            <br>
+                            <div class="col-md-6">
+                                <a type="button" class="btn btn-primary btn-lg" href="{% url 'restaurant:Add' receta.id %}" onclick="add_to_cart({item_description:'{{receta.titulo}}',price:{{receta.precio}}">Pedir</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock body %}
+{% block extrajs %}
+{% endblock extrajs %}

@@ -1,0 +1,106 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block titulo %}
+BOLETA| PEDIDO
+{% endblock titulo %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/lib/datatable/dataTables.bootstrap.min.css' %}">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="{% static 'css/print.css' %}">
+{% endblock extra_css %}
+{% block body %}
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-md-8">
+        <strong class="card-title">BOLETA</strong>
+      </div>
+
+    </div>
+
+ <section>
+    <div class="section-header">
+
+    </div>
+    <div class="section-body">
+    <div class="row">
+    <div class="col-lg-12">
+    <div class="card card-printable style-default-light">
+    <div class="card-head">
+        <div class="tools">
+
+        </div>
+    </div>
+    <div class="card-body style-default-bright" id="print">
+        <div class="row">
+            <div class="col-xs-8">
+                <h1 class="text" style="margin-top: 0px; color: #F08B0C">RESTAURANTXXI <strong class="text-accent-dark" style="color: #AEAEAE">BOLETA ELECTRONICA</strong></h1>
+
+            </div>
+        </div>
+        <br/>
+        <br/>
+      <table class="table">
+        <thead>
+            <tr>
+                <th style="width:60px" class="text-center">Cantidad</th>
+                <th class="text-left">NOMBRE DEL PLATO</th>
+                <th style="width:90px" class="text-right"> </th>
+                <th style="width:90px" class="text-right">PRECIO ACUMULADO</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="text-center">    {% for key, value in request.session.carrito.items %}
+                    {{value.cantidad}}
+                    <br>
+                    {% endfor %}</td>
+                <td> <b>{% for key, value in request.session.carrito.items %}
+                    {{value.nombre}}
+                    <br>
+                    {% endfor %}</b> </td>
+                <td class="text-right">
+                    <br>
+                    </td></td>
+                <td class="text-right"> {% for key, value in request.session.carrito.items %}
+                    ${{value.acumulado}}
+                    <br>
+                    {% endfor %} </td>
+            </tr>
+            <tr>
+                <td colspan="2" rowspan="4">
+
+                    <p><small></small></p><br><br>
+                    <p><strong><em>Nombre del Cliente: {{ user.nombres }} {{user.apellidos}}</em></strong></p>
+                </td>
+                <td class="text-right"><strong>Subtotal</strong></td>
+                <td class="text-right">${{total_carrito }}</td>
+            </tr>
+            <tr>
+                <td class="text-right hidden-border"><strong>IVA</strong></td>
+                <td class="text-right hidden-border">${{ total_iva }}</td>
+            </tr>
+            <tr>
+                <td class="text-right"><strong class="text-lg text-accent">Total</strong></td>
+                <td class="text-right"><strong class="text-lg text-accent">${{total_valor}}</strong></td>
+            </tr>
+        </tbody>
+      </table>
+
+  </div>
+
+    </div>
+        <div class="row text-right">
+                <div class="col-11"><a class="btn btn-floating-action btn-success" href="javascript:void(0);" onclick="javascript:window.print();"><i class="fa fa-print"></i></a></div>
+                <div class=""><a href="" class="btn btn-primary" >Pagar</a></div>
+            </div>
+        </div>
+        </div>
+
+</div>
+     </section>
+</div>
+    </div>
+{% endblock body %}
+{% block extrajs %}
+{% endblock extrajs %}

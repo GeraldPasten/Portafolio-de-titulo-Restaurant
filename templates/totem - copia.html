@@ -1,0 +1,65 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block titulo %}
+Totem | Mesas Disponibles
+{% endblock titulo %}
+{% block extra_css %}
+{% endblock extra_css %}
+{% block body %}
+{% load humanize %}
+<div class="card" xmlns="http://www.w3.org/1999/html">
+
+    <div class="card-header">
+        <div class="row" style="margin: 30px;">
+            <div class="col-md-8 text-center ">
+                <strong class="card-title">
+                    <h2>Mesa Disponibles</h2>
+                </strong>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row" style="padding: 10px 0;">
+                {% for Mesa in object_list %}
+                <div class="col-md-2" >
+                        <div class="card " style="height: 2rem; width: 3rem; margin: 8px 1px; " >
+                            <a class="btn btn-success" role="button" href="{% url 'restaurant:inicio_reserva' %}">{{ Mesa.nro_mesa }}</a>
+                        </div>
+                    <br>
+                </div>
+                {% endfor %}
+            </div>
+            <br>
+            <br>
+        </div>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if page_obj.has_previous %}
+                <a href="?page=1" class="btn btn-primary">&laquo; Primera</a>
+                <a href="?page={{ page_obj.previous_page_number }}" class="btn btn-primary">Anterior</a>
+                {% endif %}
+
+                <span class="current">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="btn btn-primary">Siguiente</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-primary">Última &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+
+    </div>
+</div>
+<script src="{% static 'jquery/jquery.min.js'%}"></script>
+
+
+
+
+
+
+{% endblock body %}
+{% block extrajs %}
+{% endblock extrajs %}

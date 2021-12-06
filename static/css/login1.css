@@ -1,0 +1,77 @@
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+}
+body {
+    background-size:cover;
+    background-position: center;
+    background-attachment:fixed;
+    background-image: url(../images/366291.jpg);
+    
+
+}
+
+
+main{
+    width: 100%;
+    padding: 20px;
+    margin: auto;
+    margin-top:100px;
+    position: relative;
+    
+
+}
+.login-form{
+    
+    padding: 10px 40px;
+    border: 2px solid rgb(250, 114, 35);
+    background-color: rgba(228, 87, 6, 0.835); 
+    font-size: 18px;
+    text-emphasis-color: white;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+    transform: all 300ms;
+    color: white;
+    animation-name:Traslado;
+    animation-duration:1s ;
+    
+}
+
+@keyframes Traslado {
+  0%{
+      transform: translateY(80%);
+  } 
+  50%{
+    transform: translateY(100%);
+}  
+    0%{
+        transform: translateY(0%);
+    } 
+}
+
+.login-form label{
+    color: white;
+}
+
+button{
+    padding: 10px 10px;
+    border: white;
+    height: 50px;
+    width: 100%;
+    font-size: 18px;
+    background: rgb(53, 26, 0);;
+    color: white;
+    cursor: pointer;    
+}
+button:hover{
+    color: rgb(250, 114, 35);
+}
+
+
+
